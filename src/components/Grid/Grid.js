@@ -1,4 +1,4 @@
-import GridItem from "./GridItem"
+import GridItem from "../GridItem/GridItem"
 
 const Grid = ({itens}) => {
 
@@ -8,7 +8,6 @@ const Grid = ({itens}) => {
                 <tr>
                     <th>Mercadoria</th>
                     <th>Valor</th>
-                    <th>Tipo</th>
                 </tr>
             </thead>
             <tbody>

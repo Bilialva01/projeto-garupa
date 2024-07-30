@@ -1,4 +1,4 @@
-import ResultsItem from "./ResultsItem";
+import ResultsItem from "../ResultsItem/ResultsItem";
 
 const Results = ({ vendas, compras, total }) => {
   return (
