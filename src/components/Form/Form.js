@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Grid from "../Grid/Grid";
 
 const Form = ({ handleAdd, transactionsList }) => {

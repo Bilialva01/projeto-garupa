@@ -1,11 +1,19 @@
-import ResultsItem from "../ResultsItem/ResultsItem";
+// src/components/Results/Results.js
+import React from 'react';
+import ResultsItem from '../ResultsItem/ResultsItem'; // ajuste o caminho conforme necessário
 
 const Results = ({ vendas, compras, total }) => {
   return (
     <div>
-      <ResultsItem title="Vendas" value={vendas} />
-      <ResultsItem title="Compras" value={compras} />
-      <ResultsItem title="Total" value={total} />
+      {vendas !== undefined && vendas !== null && (
+        <ResultsItem title="Vendas" value={`${vendas}`} />
+      )}
+      {compras !== undefined && compras !== null && (
+        <ResultsItem title="Compras" value={`${compras}`} />
+      )}
+      {total !== undefined && total !== null && (
+        <ResultsItem title="Total" value={`${total}`} />
+      )}
     </div>
   );
 };

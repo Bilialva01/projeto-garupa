@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'; // Verifique se React está importado
+// src/App.js
+import React, { useEffect, useState } from 'react';
 import Form from './components/Form/Form';
 import Header from './components/Header/Header';
 import Results from './components/Results/Results';
@@ -9,9 +10,9 @@ function App() {
     data ? JSON.parse(data) : []
   );
 
-  const [vendas, setVendas] = useState(0);
-  const [compras, setCompras] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [vendas, setVendas] = useState('R$ 0.00');
+  const [compras, setCompras] = useState('R$ 0.00');
+  const [total, setTotal] = useState('R$ 0.00');
 
   useEffect(() => {
     const valueCompras = transactionsList

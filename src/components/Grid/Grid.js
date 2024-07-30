@@ -1,7 +1,8 @@
-import GridItem from "../GridItem/GridItem"
+// src/components/Grid/Grid.js
+import React from "react";
+import GridItem from "../GridItem/GridItem";
 
-const Grid = ({itens}) => {
-
+const Grid = ({ itens }) => {
     return (
         <table>
             <thead>
@@ -12,11 +13,11 @@ const Grid = ({itens}) => {
             </thead>
             <tbody>
                 {itens?.map((item, index) => (
-                <GridItem key={index} item={item} />
+                    <GridItem key={index} item={item} />
                 ))}
             </tbody>
         </table>
-    )
+    );
 };
 
 export default Grid;
