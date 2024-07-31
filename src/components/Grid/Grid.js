@@ -1,9 +1,9 @@
+// Grid.js
 import React from "react";
 import GridItem from "../GridItem/GridItem";
 import Results from "../Results/Results";
 
 const Grid = ({ itens, total }) => {
-  // Inverte a ordem dos itens
   const reversedItens = itens ? [...itens].reverse() : [];
 
   return (
@@ -23,7 +23,7 @@ const Grid = ({ itens, total }) => {
         </tbody>
       </table>
       <hr />
-      <Results total={total} /> {/* Incluindo Results dentro do Grid */}
+      <Results total={total} />
     </section>
   );
 };

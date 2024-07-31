@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Form from './components/Form/Form';
 import Header from './components/Header/Header';
-
 import Footer from './components/Footer/Footer';
 
 function App() {
@@ -38,7 +37,7 @@ function App() {
   return (
     <>
       <Header />
-      <Form handleAdd={handleAdd} transactionsList={transactionsList} total={total} /> {/* Passando total para Form */}
+      <Form handleAdd={handleAdd} transactionsList={transactionsList} total={total} />
       <Footer />
     </>
   );

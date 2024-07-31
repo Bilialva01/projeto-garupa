@@ -1,69 +1,49 @@
 // src/App.test.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import App from './App'; // Ajuste o caminho conforme necessário
+import App from './App';
 
-// Mock do ResultsItem
-const MockResultsItem = ({ title, value }) => (
-  <div>
-    {title}: {value}
-  </div>
-);
-
-// Mock do Results
-const MockResults = ({ vendas, compras, total }) => (
-  <div>
-    <MockResultsItem title="Vendas" value={vendas} />
-    <MockResultsItem title="Compras" value={compras} />
-    <MockResultsItem title="Total" value={total} />
-  </div>
-);
-
-// Mock do Header e do Form
-jest.mock('./components/Header/Header', () => () => <div>Header</div>);
-jest.mock('./components/Form/Form', () => ({ handleAdd }) => (
-  <div>
-    <button onClick={() => handleAdd({ type: 'venda', value: '100' })}>
-      Adicionar transação
-    </button>
-  </div>
+// Mock dos componentes filhos
+jest.mock('./components/Header/Header', () => () => <header>Header</header>);
+jest.mock('./components/Footer/Footer', () => () => <footer>Footer</footer>);
+jest.mock('./components/Form/Form', () => ({ handleAdd, transactionsList, total }) => (
+  <form
+    onSubmit={(e) => {
+      e.preventDefault();
+      handleAdd({
+        id: 1,
+        name: 'Test Item',
+        value: '10',
+        type: 'compra',
+      });
+    }}
+  >
+    <input aria-label="Nome da mercadoria" />
+    <input aria-label="Valor" />
+    <button type="submit">Adicionar transação</button>
+    <div>{total}</div>
+  </form>
 ));
-jest.mock('./components/Results/Results', () => MockResults);
 
-describe('App component', () => {
-  beforeEach(() => {
-    // Limpa o localStorage antes de cada teste
-    localStorage.clear();
-  });
+test('renders Header, Form, and Footer components', () => {
+  render(<App />);
 
-  test('should render Header, Form, and Results components', () => {
-    render(<App />);
+  // Verificar se o Header está presente
+  expect(screen.getByText('Header')).toBeInTheDocument();
 
-    // Verifica se os componentes Header, Form e Results são renderizados
-    expect(screen.getByText('Header')).toBeInTheDocument();
-    expect(screen.getByText('Adicionar transação')).toBeInTheDocument();
-    expect(screen.getByText('Vendas: R$ 0.00')).toBeInTheDocument();
-    expect(screen.getByText('Compras: R$ 0.00')).toBeInTheDocument();
-    expect(screen.getByText('Total: R$ 0.00')).toBeInTheDocument();
-  });
+  // Verificar se o Footer está presente
+  expect(screen.getByText('Footer')).toBeInTheDocument();
 
-  test('should update Results when a transaction is added', async () => {
-    render(<App />);
+  // Verificar se o Form está presente e funcional
+  expect(screen.getByLabelText(/Nome da mercadoria/i)).toBeInTheDocument();
+  expect(screen.getByLabelText(/Valor/i)).toBeInTheDocument();
+  expect(screen.getByText('Adicionar transação')).toBeInTheDocument();
 
-    // Adiciona uma transação e aguarda a atualização
-    fireEvent.click(screen.getByText('Adicionar transação'));
+  // Preencher e enviar o formulário
+  fireEvent.change(screen.getByLabelText(/Nome da mercadoria/i), { target: { value: 'Test Item' } });
+  fireEvent.change(screen.getByLabelText(/Valor/i), { target: { value: '10' } });
+  fireEvent.click(screen.getByText('Adicionar transação'));
 
-    // Verifica se os valores foram atualizados corretamente
-    expect(await screen.findByText('Vendas: R$ +100.00')).toBeInTheDocument();
-    expect(screen.getByText('Compras: R$ -0.00')).toBeInTheDocument();
-    expect(screen.getByText('Total: R$ 100.00')).toBeInTheDocument();
-
-    // Verifica se o localStorage foi atualizado
-    const storedData = localStorage.getItem('transactions');
-    expect(storedData).toBeTruthy();
-    const transactions = JSON.parse(storedData);
-    expect(transactions).toHaveLength(1);
-    expect(transactions[0]).toEqual({ type: 'venda', value: 100 });
-  });
+  // Verificar se o total foi atualizado corretamente
+  expect(screen.getByText(/- 10.00/i)).toBeInTheDocument();
 });

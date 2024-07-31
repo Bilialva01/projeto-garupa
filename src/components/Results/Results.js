@@ -3,7 +3,6 @@ import React from 'react';
 const Results = ({ total }) => {
   return (
     <section id='resultados'>
-      <div>
       {total !== undefined && total !== null && (
         <div className="results-item">
           <span className="total-label">Total:</span>
@@ -13,7 +12,6 @@ const Results = ({ total }) => {
           </div>
         </div>
       )}
-      </div>
     </section>
   );
 };

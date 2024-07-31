@@ -2,32 +2,37 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Results from './Results'; // ajuste o caminho conforme necessário
+import Results from './Results';
 
-// Mock do componente ResultsItem
-jest.mock('../ResultsItem/ResultsItem', () => ({ title, value }) => (
-  <div>
-    <h2>{title}</h2>
-    <p>{value}</p>
-  </div>
-));
+describe('Results Component', () => {
+  test('renders total value when total is provided', () => {
+    render(<Results total={100} />);
 
-describe('Results component', () => {
-  const mockTotal = '1500.00';
+    // Verifica se a label "Total:" está presente
+    expect(screen.getByText(/Total:/i)).toBeInTheDocument();
 
-  test('should render Results with correct values', () => {
-    render(<Results total={mockTotal} />);
+    // Verifica se o valor total está presente e formatado corretamente
+    expect(screen.getByText(/R\$ 100/i)).toBeInTheDocument();
 
-    expect(screen.getByText('Total')).toBeInTheDocument();
-    expect(screen.getByText(`R$ ${mockTotal}`)).toBeInTheDocument();
+    // Verifica se o texto "[LUCRO]" está presente
+    expect(screen.getByText(/\[LUCRO\]/i)).toBeInTheDocument();
   });
 
-  test('should not render Results items if values are not provided', () => {
-    render(<Results />);
+  test('does not render anything when total is undefined', () => {
+    render(<Results total={undefined} />);
 
-    // Verifica que os itens não são exibidos se as props não forem fornecidas
-    expect(screen.queryByText('Vendas')).not.toBeInTheDocument();
-    expect(screen.queryByText('Compras')).not.toBeInTheDocument();
-    expect(screen.queryByText('Total')).not.toBeInTheDocument();
+    // Verifica se o componente não renderiza nada
+    expect(screen.queryByText(/Total:/i)).toBeNull();
+    expect(screen.queryByText(/R\$ 100/i)).toBeNull();
+    expect(screen.queryByText(/\[LUCRO\]/i)).toBeNull();
+  });
+
+  test('does not render anything when total is null', () => {
+    render(<Results total={null} />);
+
+    // Verifica se o componente não renderiza nada
+    expect(screen.queryByText(/Total:/i)).toBeNull();
+    expect(screen.queryByText(/R\$ 100/i)).toBeNull();
+    expect(screen.queryByText(/\[LUCRO\]/i)).toBeNull();
   });
 });
