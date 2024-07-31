@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import Grid from "./Grid";
 
-// Mock the GridItem and Results components
 jest.mock("../GridItem/GridItem", () => ({ item }) => <tr><td>{item.name}</td><td>{item.value}</td></tr>);
 jest.mock("../Results/Results", () => ({ total }) => <div>Total: {total}</div>);
 
@@ -26,9 +25,8 @@ describe("Grid Component", () => {
 
   test("renders the items in reverse order", () => {
     const rows = screen.getAllByRole("row");
-    expect(rows).toHaveLength(items.length + 1); // +1 for the header row
+    expect(rows).toHaveLength(items.length + 1);
 
-    // Check the order of items
     expect(rows[1]).toHaveTextContent("Produto B");
     expect(rows[1]).toHaveTextContent("200");
     expect(rows[2]).toHaveTextContent("Produto A");

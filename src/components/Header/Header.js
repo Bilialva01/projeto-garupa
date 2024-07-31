@@ -3,7 +3,6 @@ import React, { useState, useCallback } from 'react';
 const Header = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
 
-  // Utilizando useCallback para otimizar a função
   const toggleNav = useCallback(() => {
     setIsNavVisible(prevState => !prevState);
   }, []);
@@ -17,7 +16,7 @@ const Header = () => {
       <button
         className="navbar-toggle"
         aria-label="menu icon"
-        aria-expanded={isNavVisible} // Adiciona a propriedade aria-expanded
+        aria-expanded={isNavVisible}
         onClick={toggleNav}
       >
         <svg

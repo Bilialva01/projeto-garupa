@@ -69,7 +69,7 @@ const Form = ({ handleAdd, transactionsList, total }) => {
           <button id="btn" type="submit">Adicionar transação</button>
         </div>
       </form>
-      <Grid itens={transactionsList} total={total} /> {/* Passando total para Grid */}
+      <Grid itens={transactionsList} total={total} /> 
     </section>
   );
 };

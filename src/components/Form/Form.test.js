@@ -10,12 +10,10 @@ test('submits the form with valid data', () => {
 
   render(<Form handleAdd={handleAdd} transactionsList={transactionsList} total={total} />);
 
-  // Preencher o formulário
   fireEvent.change(screen.getByLabelText(/Nome da mercadoria/i), { target: { value: 'Mercadoria 1' } });
   fireEvent.change(screen.getByLabelText(/Valor/i), { target: { value: '100' } });
   fireEvent.click(screen.getByText('Adicionar transação'));
 
-  // Verificar se os campos foram limpos após o envio
   expect(screen.getByLabelText(/Nome da mercadoria/i).value).toBe('');
   expect(screen.getByLabelText(/Valor/i).value).toBe('');
 });
