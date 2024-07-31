@@ -9,6 +9,6 @@ describe('Header component', () => {
     render(<Header />);
 
     // Verifica se o texto "Header" está sendo exibido corretamente
-    expect(screen.getByText('Header')).toBeInTheDocument();
+    expect(screen.getByText('Controle Financeiro')).toBeInTheDocument();
   });
 });

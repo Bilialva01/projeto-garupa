@@ -2,13 +2,11 @@ import React from 'react';
 
 const ResultsItem = ({ title, value }) => {
   return (
-    <>
-      <span>{title}</span>
-      <span>{value}</span>
-    </>
+    <div className="results-item">
+      <span className="results-title">{title}</span>
+      <span className="results-value">{value}</span>
+    </div>
   );
 };
 
 export default ResultsItem;
-
-  

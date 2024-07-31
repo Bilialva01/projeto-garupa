@@ -13,19 +13,10 @@ jest.mock('../ResultsItem/ResultsItem', () => ({ title, value }) => (
 ));
 
 describe('Results component', () => {
-  const mockVendas = '1000.00';
-  const mockCompras = '500.00';
   const mockTotal = '1500.00';
 
   test('should render Results with correct values', () => {
-    render(<Results vendas={mockVendas} compras={mockCompras} total={mockTotal} />);
-
-    // Verifica se cada item está sendo exibido corretamente
-    expect(screen.getByText('Vendas')).toBeInTheDocument();
-    expect(screen.getByText(`R$ ${mockVendas}`)).toBeInTheDocument();
-
-    expect(screen.getByText('Compras')).toBeInTheDocument();
-    expect(screen.getByText(`R$ ${mockCompras}`)).toBeInTheDocument();
+    render(<Results total={mockTotal} />);
 
     expect(screen.getByText('Total')).toBeInTheDocument();
     expect(screen.getByText(`R$ ${mockTotal}`)).toBeInTheDocument();

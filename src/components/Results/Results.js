@@ -1,20 +1,20 @@
-// src/components/Results/Results.js
 import React from 'react';
-import ResultsItem from '../ResultsItem/ResultsItem'; // ajuste o caminho conforme necessário
 
-const Results = ({ vendas, compras, total }) => {
+const Results = ({ total }) => {
   return (
-    <div>
-      {vendas !== undefined && vendas !== null && (
-        <ResultsItem title="Vendas" value={`${vendas}`} />
-      )}
-      {compras !== undefined && compras !== null && (
-        <ResultsItem title="Compras" value={`${compras}`} />
-      )}
+    <section id='resultados'>
+      <div>
       {total !== undefined && total !== null && (
-        <ResultsItem title="Total" value={`${total}`} />
+        <div className="results-item">
+          <span className="total-label">Total:</span>
+          <div className="total-container">
+            <span className="total-value">{`R$ ${total}`}</span>
+            <span className="lucro-text">[LUCRO]</span>
+          </div>
+        </div>
       )}
-    </div>
+      </div>
+    </section>
   );
 };
 

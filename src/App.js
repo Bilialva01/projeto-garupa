@@ -1,8 +1,8 @@
-// src/App.js
 import React, { useEffect, useState } from 'react';
 import Form from './components/Form/Form';
 import Header from './components/Header/Header';
-import Results from './components/Results/Results';
+
+import Footer from './components/Footer/Footer';
 
 function App() {
   const data = localStorage.getItem('transactions');
@@ -10,8 +10,6 @@ function App() {
     data ? JSON.parse(data) : []
   );
 
-  const [vendas, setVendas] = useState('R$ 0.00');
-  const [compras, setCompras] = useState('R$ 0.00');
   const [total, setTotal] = useState('R$ 0.00');
 
   useEffect(() => {
@@ -28,9 +26,7 @@ function App() {
 
     const total = Math.abs(vendas - compras).toFixed(2);
 
-    setCompras(`R$ -${compras}`);
-    setVendas(`R$ +${vendas}`);
-    setTotal(`${Number(vendas) < Number(compras) ? '-' : ''}R$ ${total}`);
+    setTotal(`${Number(vendas) < Number(compras) ? '-' : ''} ${total}`);
   }, [transactionsList]);
 
   const handleAdd = (transaction) => {
@@ -42,8 +38,8 @@ function App() {
   return (
     <>
       <Header />
-      <Form handleAdd={handleAdd} transactionsList={transactionsList} />
-      <Results vendas={vendas} compras={compras} total={total} />
+      <Form handleAdd={handleAdd} transactionsList={transactionsList} total={total} /> {/* Passando total para Form */}
+      <Footer />
     </>
   );
 }

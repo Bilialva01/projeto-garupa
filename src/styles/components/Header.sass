@@ -1,0 +1,91 @@
+@import '../utils/mixins'
+  
+#header 
+  display: flex
+  align-items: center
+  justify-content: space-between
+  background-color: variables.$secundary-color
+  padding: 10px 20px
+  height: 60px
+  position: relative
+
+  .logo 
+    width: 50px
+    height: auto
+
+  h1 
+    flex: 1
+    text-align: center
+    margin: 0
+    font-size: 24px
+    font-weight: lighter
+
+  .navbar-toggle 
+    background-color: variables.$secundary-color
+    color: variables.$primary-color
+    border: none
+    cursor: pointer
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: 16px
+
+  .menu-icon 
+    width: 20px
+    height: 20px
+
+  .navbar 
+    position: fixed
+    top: 0
+    right: 0
+    width: 351px
+    height: 100%
+    background-color: variables.$primary-color
+    z-index: 1000
+    display: flex
+    flex-direction: column
+
+    .close-btn 
+      position: absolute
+      top: 20px
+      left: 20px
+      background: none
+      border: none
+      color: #fff
+      font-size: 30px
+      cursor: pointer
+
+    ul 
+      list-style: none
+      padding: 0
+      margin-top: 62px
+      margin-right: 20px
+      text-align: right
+
+    li 
+      margin: 20px 0
+
+    a 
+      text-decoration: none
+      color: #fff
+      font-family: Lato
+      font-size: 16px
+      line-height: 19.2px
+      &:hover
+        text-decoration: underline
+
+@include respond-to('md')
+  .navbar 
+    width: 252px !important
+
+@include respond-to('lg')
+  #header h1
+    font-size: 20px
+    text-align: left
+    padding-left: 20px
+    
+
+// @include respond-to('xl')
+//   #header
+//     background-color: #2ecc71
+//     padding: 12px

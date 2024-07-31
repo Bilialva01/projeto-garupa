@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Grid from "../Grid/Grid";
 
-const Form = ({ handleAdd, transactionsList }) => {
+const Form = ({ handleAdd, transactionsList, total }) => {
   const [name, setName] = useState("");
   const [value, setValue] = useState("");
   const [compra, setCompra] = useState(true);
@@ -32,9 +32,9 @@ const Form = ({ handleAdd, transactionsList }) => {
   };
 
   return (
-    <section>
-      <form onSubmit={handleSave}>
-        <div>
+    <section id="form">
+      <form id="transactionForm" onSubmit={handleSave}>
+        <div className="inputsBase">
           <label htmlFor="transactionType">Tipo de transação</label>
           <select
             id="transactionType"
@@ -45,17 +45,17 @@ const Form = ({ handleAdd, transactionsList }) => {
             <option value="venda">Venda</option>
           </select>
         </div>
-        <div>
-          <label htmlFor="name">Nome de mercadoria</label>
+        <div className="inputsBase Name">
+          <label htmlFor="name">Nome da mercadoria</label>
           <input
             type="text"
             id="name"
             value={name}
-            placeholder="input"
+            placeholder="Input"
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div>
+        <div className="inputsBase">
           <label htmlFor="value">Valor</label>
           <input
             type="number"
@@ -65,9 +65,11 @@ const Form = ({ handleAdd, transactionsList }) => {
             onChange={(e) => setValue(e.target.value)}
           />
         </div>
-        <button type="submit">Adicionar transação</button>
+        <div id="btnBase">
+          <button id="btn" type="submit">Adicionar transação</button>
+        </div>
       </form>
-      <Grid itens={transactionsList} />
+      <Grid itens={transactionsList} total={total} /> {/* Passando total para Grid */}
     </section>
   );
 };
